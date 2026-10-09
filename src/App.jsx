@@ -3,7 +3,30 @@ import { GlobalStyle } from "./GlobalStyle";
 import { theme } from "./theme";
 import report from "./data/report.json";
 import CategoryCard from "./components/CategoryCard";
-import { OverallCard, ComplianceCard, ServerInfoCard, AttackSurfaceCard, RootCauseCard, FixesCard } from "./components/SummaryCards";
+import {
+  OverallCard,
+  ComplianceCard,
+  ServerInfoCard,
+  AttackSurfaceCard,
+  RootCauseCard,
+  FixesCard,
+} from "./components/SummaryCards";
+
+import Logo from "./data/Logo.png";
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+`;
+
+const LogoImage = styled.img`
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+`;
 
 const Page = styled.main`
   max-width: 1280px;
@@ -12,7 +35,7 @@ const Page = styled.main`
 `;
 const Title = styled.h1`
   font-family: Orbitron, Rajdhani, sans-serif;
-  font-size: clamp(24px, 4vw, 34px);
+  font-size: clamp(24px, 3vw, 34px);
   color: ${(p) => p.theme.brand};
 `;
 const Sub = styled.p`
@@ -53,7 +76,10 @@ export default function App({ data = report }) {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Page>
-        <Title>{data.domain}</Title>
+        <Header>
+          <LogoImage src={Logo} alt="Logo" />
+          <Title>{data.domain}</Title>
+        </Header>
         <Sub>Domain health report</Sub>
         <Masonry>
           {cards.map((card) => (
